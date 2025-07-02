@@ -15,3 +15,19 @@ CREATE INDEX idx_properties_location ON properties(location);
 
 -- Index on price for filtering or sorting
 CREATE INDEX idx_properties_price ON properties(price);
+
+-- ==============================================
+-- Performance tests using EXPLAIN ANALYZE
+-- ==============================================
+
+-- Test 1: Bookings by user_id
+EXPLAIN ANALYZE
+SELECT * FROM bookings WHERE user_id = 3;
+
+-- Test 2: Bookings by property_id ordered by created_at
+EXPLAIN ANALYZE
+SELECT * FROM bookings WHERE property_id = 5 ORDER BY created_at DESC;
+
+-- Test 3: Lookup user by email
+EXPLAIN ANALYZE
+SELECT * FROM users WHERE email = 'user@example.com';

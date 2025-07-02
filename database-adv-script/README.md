@@ -65,13 +65,13 @@ WHERE (
 
 # Aggregations and Window Functions – ALX Airbnb Clone Backend
 
-This SQL script demonstrates the use of aggregation and window functions to analyze booking and property data in the Airbnb Clone project.
+This directory contains SQL queries that demonstrate the use of SQL aggregation and window functions for data analysis in the Airbnb Clone backend.
 
 ## File: aggregations_and_window_functions.sql
 
 ### 1. Aggregation – Total Bookings per User
 
-This query calculates the total number of bookings each user has made using `COUNT()` and `GROUP BY`.
+This query calculates the total number of bookings each user has made.
 
 ```sql
 SELECT users.id, users.first_name, users.last_name, COUNT(bookings.id) AS total_bookings

@@ -63,5 +63,19 @@ WHERE (
     WHERE b.user_id = u.id
 ) > 3;
 
-bash
-psql -d airbnb_clone -f subqueries.sql
+# Aggregations and Window Functions – ALX Airbnb Clone Backend
+
+This SQL script demonstrates the use of aggregation and window functions to analyze booking and property data in the Airbnb Clone project.
+
+## File: aggregations_and_window_functions.sql
+
+### 1. Aggregation – Total Bookings per User
+
+This query calculates the total number of bookings each user has made using `COUNT()` and `GROUP BY`.
+
+```sql
+SELECT users.id, users.first_name, users.last_name, COUNT(bookings.id) AS total_bookings
+FROM users
+LEFT JOIN bookings ON users.id = bookings.user_id
+GROUP BY users.id, users.first_name, users.last_name
+ORDER BY total_bookings DESC;

@@ -29,3 +29,39 @@ Requirements
 
 Author
 Prince Ochogwu – ALX Backend Advanced SQL Project
+
+# SQL Subqueries – ALX Airbnb Clone Backend
+
+This directory contains SQL subqueries for retrieving specific data insights from the Airbnb Clone relational database.
+
+## File: subqueries.sql
+
+### 1. Non-Correlated Subquery
+- Retrieves all properties where the **average rating is greater than 4.0**.
+- Uses a subquery in the `WHERE` clause that is independent of the outer query.
+
+```sql
+SELECT id, name, location
+FROM properties
+WHERE id IN (
+    SELECT property_id
+    FROM reviews
+    GROUP BY property_id
+    HAVING AVG(rating) > 4.0
+);
+
+2. Correlated Subquery
+Retrieves all users who have made more than 3 bookings.
+
+The subquery depends on the outer query and is re-evaluated for each user.
+
+SELECT id, first_name, last_name, email
+FROM users u
+WHERE (
+    SELECT COUNT(*)
+    FROM bookings b
+    WHERE b.user_id = u.id
+) > 3;
+
+bash
+psql -d airbnb_clone -f subqueries.sql

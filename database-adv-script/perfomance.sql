@@ -1,4 +1,7 @@
--- Original Complex Query
+-- =======================================
+-- Original Complex Query (with WHERE)
+-- =======================================
+
 EXPLAIN ANALYZE
 SELECT
     bookings.id AS booking_id,
@@ -14,10 +17,18 @@ SELECT
 FROM bookings
 JOIN users ON bookings.user_id = users.id
 JOIN properties ON bookings.property_id = properties.id
-LEFT JOIN payments ON payments.booking_id = bookings.id;
+LEFT JOIN payments ON payments.booking_id = bookings.id
+WHERE users.id = 3 AND payments.status = 'completed';
 
--- Optimized Query
--- Assumes indexes have been created on bookings.user_id, bookings.property_id, payments.booking_id
+-- =======================================
+-- Optimized Query (with WHERE)
+-- =======================================
+
+-- Assumes indexes on:
+--   - bookings.user_id
+--   - bookings.property_id
+--   - payments.booking_id
+--   - payments.status
 
 EXPLAIN ANALYZE
 SELECT
@@ -34,4 +45,5 @@ SELECT
 FROM bookings b
 JOIN users u ON b.user_id = u.id
 JOIN properties p ON b.property_id = p.id
-LEFT JOIN payments pay ON pay.booking_id = b.id;
+LEFT JOIN payments pay ON pay.booking_id = b.id
+WHERE u.id = 3 AND pay.status = 'completed';

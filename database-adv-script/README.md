@@ -79,3 +79,40 @@ FROM users
 LEFT JOIN bookings ON users.id = bookings.user_id
 GROUP BY users.id, users.first_name, users.last_name
 ORDER BY total_bookings DESC;
+
+# Airbnb Database Optimization: Index Implementation
+
+## Objective
+
+Improve the performance of database queries by identifying frequently accessed columns and creating appropriate indexes on them.
+
+## Files
+
+- **database_index.sql**: Contains `CREATE INDEX` statements for optimizing key columns in the `users`, `bookings`, and `properties` tables.
+- **index_performance.md**: Performance analysis using `EXPLAIN ANALYZE` to compare query execution times before and after adding indexes.
+
+## Why Indexes?
+
+Indexes improve the speed of data retrieval operations on a database table at the cost of additional space and slower write operations. In a high-read environment like Airbnb, they are essential for:
+
+- Faster filtering (`WHERE`)
+- Quicker joins between tables
+- Efficient ordering (`ORDER BY`)
+
+## Indexed Columns
+
+| Table       | Column         | Reason                          |
+|-------------|----------------|----------------------------------|
+| bookings    | user_id        | Used in JOIN/WHERE conditions   |
+| bookings    | property_id    | Used in JOIN/WHERE conditions   |
+| bookings    | created_at     | Used for ORDER BY (recent bookings) |
+| users       | email          | Often queried for authentication |
+| properties  | location       | Used in search/filter conditions |
+| properties  | price          | Frequently sorted or filtered   |
+
+## Setup
+
+To apply the indexes:
+
+```sql
+\i database_index.sql

@@ -17,18 +17,6 @@ This directory contains SQL queries that demonstrate mastery of SQL JOINs using 
 - Ensures that even users without bookings or bookings without users (e.g., orphan data) are included.
 - Requires PostgreSQL or another DBMS that supports FULL OUTER JOIN.
 
-## Usage
-Run the queries using your PostgreSQL CLI or any compatible SQL client.
-
-```bash
-psql -d airbnb_clone -f joins_queries.sql
-
-Requirements
-- PostgreSQL
-- Existing tables: users, bookings, properties, reviews
-
-Author
-Prince Ochogwu – ALX Backend Advanced SQL Project
 
 # SQL Subqueries – ALX Airbnb Clone Backend
 
@@ -63,13 +51,13 @@ WHERE (
     WHERE b.user_id = u.id
 ) > 3;
 
-# Aggregations and Window Functions – ALX Airbnb Clone Backend
+Aggregations and Window Functions – ALX Airbnb Clone Backend
 
 This directory contains SQL queries that demonstrate the use of SQL aggregation and window functions for data analysis in the Airbnb Clone backend.
 
-## File: aggregations_and_window_functions.sql
+File: aggregations_and_window_functions.sql
 
-### 1. Aggregation – Total Bookings per User
+Aggregation – Total Bookings per User
 
 This query calculates the total number of bookings each user has made.
 
@@ -80,18 +68,18 @@ LEFT JOIN bookings ON users.id = bookings.user_id
 GROUP BY users.id, users.first_name, users.last_name
 ORDER BY total_bookings DESC;
 
-# Airbnb Database Optimization: Index Implementation
+Airbnb Database Optimization: Index Implementation
 
-## Objective
+Objective
 
 Improve the performance of database queries by identifying frequently accessed columns and creating appropriate indexes on them.
 
-## Files
+Files:
 
-- **database_index.sql**: Contains `CREATE INDEX` statements for optimizing key columns in the `users`, `bookings`, and `properties` tables.
-- **index_performance.md**: Performance analysis using `EXPLAIN ANALYZE` to compare query execution times before and after adding indexes.
+- database_index.sql: Contains `CREATE INDEX` statements for optimizing key columns in the `users`, `bookings`, and `properties` tables.
+- index_performance.md: Performance analysis using `EXPLAIN ANALYZE` to compare query execution times before and after adding indexes.
 
-## Why Indexes?
+Why Indexes?
 
 Indexes improve the speed of data retrieval operations on a database table at the cost of additional space and slower write operations. In a high-read environment like Airbnb, they are essential for:
 
@@ -99,7 +87,7 @@ Indexes improve the speed of data retrieval operations on a database table at th
 - Quicker joins between tables
 - Efficient ordering (`ORDER BY`)
 
-## Indexed Columns
+Indexed Columns
 
 | Table       | Column         | Reason                          |
 |-------------|----------------|----------------------------------|
@@ -110,9 +98,19 @@ Indexes improve the speed of data retrieval operations on a database table at th
 | properties  | location       | Used in search/filter conditions |
 | properties  | price          | Frequently sorted or filtered   |
 
-## Setup
+Setup
 
 To apply the indexes:
 
 ```sql
 \i database_index.sql
+
+Usage
+Run the queries using your PostgreSQL CLI or any compatible SQL client.
+
+Requirements
+- PostgreSQL
+- Existing tables: users, bookings, properties, reviews
+
+Author
+Prince Ochogwu – ALX Backend Advanced SQL Project

@@ -4,8 +4,6 @@
 
 Refactor a complex SQL query that retrieves all booking records along with user details, property details, and payment details. The aim is to improve performance using indexes and better query structure.
 
----
-
 ## 🔍 Original Query
 
 ```sql
